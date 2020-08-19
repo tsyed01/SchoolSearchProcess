@@ -26,7 +26,7 @@
           <SSIS:Property SSIS:Name="CreatorComputerName">335DPC903</SSIS:Property>
           <SSIS:Property SSIS:Name="Description">
           </SSIS:Property>
-          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAOEL2pU9uLEK9DaK/PHIjFgAAAAACAAAAAAADZgAAwAAAABAAAAC5O+2Qxw+LH09dskg2E9rtAAAAAASAAACgAAAAEAAAAG+iOZqTJOKtoLtAYMpSLQ6IAAAASAjKINfpQWJUyfffORp4wqYMG49OZ7lOr0qJr2gOMh6xFmNXm6YCRWDk+0eA0HZyCd58KEdVN7px+kkZmA2fN791kSul5rI+LxSnfojICFUH4gMprCcX1eMAV75QvY/TSi/xYPrBZxLbwnwr/b+f1hOUEl0uvYZcHrOvLWqnkxTU5JuEqey4fRQAAABgCV7U6btui0N/MEL0Y6Gz4RESLg==</SSIS:Property>
+          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAOEL2pU9uLEK9DaK/PHIjFgAAAAACAAAAAAADZgAAwAAAABAAAAAQJqeK1jMoDZJNOvXOW4QKAAAAAASAAACgAAAAEAAAAEd9kN/vhpTJgZ+XeNfQYGGIAAAAmFezgI7wTX+IuulyOU6Lj1CCAf/CwSZuJPCbMMXqwTL8qWY0XX8k7TAeyCxtplDUppPov1e491tKyNvq5nO3k7Ay/+LtTQjfHxVny33gg1Xb++p9DqgBYxGS5snceEFHFwpT0Q/o1XlsqIjKOSwfjjJd0oZWX36ZRxsNkbXVaDhhIohizv2iPBQAAAALBedPFzjwHFtVBzreMKEDPJ66BQ==</SSIS:Property>
           <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
         </SSIS:Properties>
         <SSIS:Packages>
@@ -42,17 +42,17 @@
                 <SSIS:Property SSIS:Name="Name">Package</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">4</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">12</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{9C460197-7E79-4DBB-B4AA-07586898A3E4}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{05A4F9FC-859B-43BC-9B27-FCDA0EA6F149}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
                 <SSIS:Property SSIS:Name="ProtectionLevel">1</SSIS:Property>
               </SSIS:Properties>
               <SSIS:Parameters>
-                <SSIS:Parameter SSIS:Name="CM.ES11VdSINFSQL01.lcgmsappuser.ConnectByProxy">
+                <SSIS:Parameter SSIS:Name="CM.Dev-SchoolSearch.Database.Windows.Net, 1433.dev-schoolsearch.schoolsearch.ConnectByProxy">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">
                     </SSIS:Property>
@@ -67,7 +67,7 @@
                     <SSIS:Property SSIS:Name="DataType">3</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.ES11VdSINFSQL01.lcgmsappuser.ConnectionString">
+                <SSIS:Parameter SSIS:Name="CM.Dev-SchoolSearch.Database.Windows.Net, 1433.dev-schoolsearch.schoolsearch.ConnectionString">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">
                     </SSIS:Property>
@@ -78,11 +78,11 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">Data Source=ES11VdSINFSQL01;User ID=lcgmsappuser;Provider=MSOLEDBSQL.1;Auto Translate=False;</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">Data Source=Dev-SchoolSearch.Database.Windows.Net, 1433;User ID=schoolsearch;Initial Catalog=dev-schoolsearch;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.ES11VdSINFSQL01.lcgmsappuser.ConnectUsingManagedIdentity">
+                <SSIS:Parameter SSIS:Name="CM.Dev-SchoolSearch.Database.Windows.Net, 1433.dev-schoolsearch.schoolsearch.ConnectUsingManagedIdentity">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">
                     </SSIS:Property>
@@ -97,7 +97,7 @@
                     <SSIS:Property SSIS:Name="DataType">3</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.ES11VdSINFSQL01.lcgmsappuser.InitialCatalog">
+                <SSIS:Parameter SSIS:Name="CM.Dev-SchoolSearch.Database.Windows.Net, 1433.dev-schoolsearch.schoolsearch.InitialCatalog">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">
                     </SSIS:Property>
@@ -108,10 +108,11 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">dev-schoolsearch</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.ES11VdSINFSQL01.lcgmsappuser.Password">
+                <SSIS:Parameter SSIS:Name="CM.Dev-SchoolSearch.Database.Windows.Net, 1433.dev-schoolsearch.schoolsearch.Password">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">
                     </SSIS:Property>
@@ -125,7 +126,7 @@
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.ES11VdSINFSQL01.lcgmsappuser.RetainSameConnection">
+                <SSIS:Parameter SSIS:Name="CM.Dev-SchoolSearch.Database.Windows.Net, 1433.dev-schoolsearch.schoolsearch.RetainSameConnection">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">
                     </SSIS:Property>
@@ -140,7 +141,7 @@
                     <SSIS:Property SSIS:Name="DataType">3</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.ES11VdSINFSQL01.lcgmsappuser.ServerName">
+                <SSIS:Parameter SSIS:Name="CM.Dev-SchoolSearch.Database.Windows.Net, 1433.dev-schoolsearch.schoolsearch.ServerName">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">
                     </SSIS:Property>
@@ -151,11 +152,11 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">ES11VdSINFSQL01</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">Dev-SchoolSearch.Database.Windows.Net, 1433</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.ES11VdSINFSQL01.lcgmsappuser.UserName">
+                <SSIS:Parameter SSIS:Name="CM.Dev-SchoolSearch.Database.Windows.Net, 1433.dev-schoolsearch.schoolsearch.UserName">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">
                     </SSIS:Property>
@@ -166,7 +167,7 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">lcgmsappuser</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">schoolsearch</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
@@ -313,7 +314,13 @@
         <LinkedAzureSSISIR />
         <LinkedAzureStorage />
         <RemoteExecutionFolder />
-        <ParameterConfigurationValues />
+        <ParameterConfigurationValues>
+          <ConfigurationSetting>
+            <Id>LastModifiedTime</Id>
+            <Name>LastModifiedTime</Name>
+            <Value xsi:type="xsd:dateTime">2020-08-16T22:03:44.8850028Z</Value>
+          </ConfigurationSetting>
+        </ParameterConfigurationValues>
       </Options>
     </Configuration>
   </Configurations>

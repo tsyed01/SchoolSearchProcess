@@ -11,23 +11,23 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="4"
-  DTS:VersionGUID="{9C460197-7E79-4DBB-B4AA-07586898A3E4}">
+  DTS:VersionBuild="12"
+  DTS:VersionGUID="{05A4F9FC-859B-43BC-9B27-FCDA0EA6F149}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
     <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[ES11VdSINFSQL01.lcgmsappuser]"
+      DTS:refId="Package.ConnectionManagers[Dev-SchoolSearch.Database.Windows.Net, 1433.dev-schoolsearch.schoolsearch]"
       DTS:CreationName="OLEDB"
-      DTS:DTSID="{D7E2A76F-537C-4901-BF76-057B06494E35}"
-      DTS:ObjectName="ES11VdSINFSQL01.lcgmsappuser">
+      DTS:DTSID="{67C73310-E710-4014-91B1-3064CE8DE898}"
+      DTS:ObjectName="Dev-SchoolSearch.Database.Windows.Net, 1433.dev-schoolsearch.schoolsearch">
       <DTS:ObjectData>
         <DTS:ConnectionManager
-          DTS:ConnectionString="Data Source=ES11VdSINFSQL01;User ID=lcgmsappuser;Provider=MSOLEDBSQL.1;Auto Translate=False;">
+          DTS:ConnectionString="Data Source=Dev-SchoolSearch.Database.Windows.Net, 1433;User ID=schoolsearch;Initial Catalog=dev-schoolsearch;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAOEL2pU9uLEK9DaK/PHIjFgAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAATFL4sSOBuF9xBnrNluZAWAAAAAASAAACgAAAAEAAAAJlloBNnambssIK1obojRUYQAAAArhp1IQYoms2SqRqCjNg2UxQAAABrml67bgw5c53QDUqMSyXIk7D8HQ</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAOEL2pU9uLEK9DaK/PHIjFgAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAB2uE2NoZofe1idJicrhzYBAAAAAASAAACgAAAAEAAAAHz64tYWRZyJxuD3WrLybuMgAAAAPh1cPZaCFtELCOOIavAemG43ZhVOvupnJEYePSSUyvEUAAAArIW7LplFdJ0cYcrBBwHmjCaMkCM</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -45,13 +45,13 @@
   <DTS:Variables />
   <DTS:Executables>
     <DTS:Executable
-      DTS:refId="Package\Data Flow Task"
+      DTS:refId="Package\Data Flow Task - Copy to Azure Database"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Data Flow Task"
       DTS:DTSID="{7764EB48-D146-4D47-9282-389FC65914E0}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Data Flow Task"
+      DTS:ObjectName="Data Flow Task - Copy to Azure Database"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
       <DTS:ObjectData>
@@ -59,7 +59,7 @@
           version="1">
           <components>
             <component
-              refId="Package\Data Flow Task\OLE DB Destination"
+              refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination"
               componentClassID="Microsoft.OLEDBDestination"
               contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
               description="OLE DB Destination"
@@ -74,7 +74,7 @@
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset"></property>
+                  name="OpenRowset">[dbo].[LCGMS_SchoolSearch]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -116,41 +116,372 @@
               </properties>
               <connections>
                 <connection
-                  refId="Package\Data Flow Task\OLE DB Destination.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[ES11VdSINFSQL01.lcgmsappuser]"
-                  connectionManagerRefId="Package.ConnectionManagers[ES11VdSINFSQL01.lcgmsappuser]"
+                  refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Dev-SchoolSearch.Database.Windows.Net, 1433.dev-schoolsearch.schoolsearch]"
+                  connectionManagerRefId="Package.ConnectionManagers[Dev-SchoolSearch.Database.Windows.Net, 1433.dev-schoolsearch.schoolsearch]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
               <inputs>
                 <input
-                  refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input]"
                   errorOrTruncationOperation="Insert"
                   errorRowDisposition="FailComponent"
                   hasSideEffects="true"
                   name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Location_Code]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="Location_Code"
+                      externalMetadataColumnId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Location_Code]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Location_Code]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Location_Name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="Location_Name"
+                      externalMetadataColumnId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Location_Name]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Location_Name]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Address_Line_1]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Address_Line_1"
+                      externalMetadataColumnId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Address_Line_1]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Address_Line_1]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[X_Coordinate]"
+                      cachedDataType="numeric"
+                      cachedName="X_Coordinate"
+                      cachedPrecision="12"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[X_Coordinate]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[X_Coordinate]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Y_Coordinate]"
+                      cachedDataType="numeric"
+                      cachedName="Y_Coordinate"
+                      cachedPrecision="12"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Y_Coordinate]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Y_Coordinate]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Primary_Site_Flag]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Primary_Site_Flag"
+                      externalMetadataColumnId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Primary_Site_Flag]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Primary_Site_Flag]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Managed_By_Code]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="Managed_By_Code"
+                      externalMetadataColumnId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Managed_By_Code]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Managed_By_Code]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Managed_By_Name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="35"
+                      cachedName="Managed_By_Name"
+                      externalMetadataColumnId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Managed_By_Name]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Managed_By_Name]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Learning_Community_Code]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Learning_Community_Code"
+                      externalMetadataColumnId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Learning_Community_Code]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Learning_Community_Code]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Location_Type_Code]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="Location_Type_Code"
+                      externalMetadataColumnId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Location_Type_Code]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Location_Type_Code]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Location_Category_Code]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="Location_Category_Code"
+                      externalMetadataColumnId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Location_Category_Code]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Location_Category_Code]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[City]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="City"
+                      externalMetadataColumnId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[City]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[State_Code]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="State_Code"
+                      externalMetadataColumnId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[State_Code]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[State_Code]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Zip]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="Zip"
+                      externalMetadataColumnId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Zip]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Zip]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Geographical_District_Code]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="Geographical_District_Code"
+                      externalMetadataColumnId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Geographical_District_Code]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Geographical_District_Code]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Grades]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="45"
+                      cachedName="Grades"
+                      externalMetadataColumnId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Grades]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Grades]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Administrative_District_Code]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="Administrative_District_Code"
+                      externalMetadataColumnId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Administrative_District_Code]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Administrative_District_Code]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Building_Id_Number]"
+                      cachedDataType="i4"
+                      cachedName="Building_Id_Number"
+                      externalMetadataColumnId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Building_Id_Number]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Building_Id_Number]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Location_Phone_Number]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="15"
+                      cachedName="Location_Phone_Number"
+                      externalMetadataColumnId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Location_Phone_Number]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Location_Phone_Number]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[NTA_Name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="75"
+                      cachedName="NTA_Name"
+                      externalMetadataColumnId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NTA_Name]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[NTA_Name]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Borough_Code]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Borough_Code"
+                      externalMetadataColumnId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Borough_Code]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Borough_Code]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Status_Code]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Status_Code"
+                      externalMetadataColumnId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Status_Code]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Status_Code]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LCGMS_SchoolSearch_Timestamp]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="LCGMS_SchoolSearch_Timestamp"
+                      externalMetadataColumnId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LCGMS_SchoolSearch_Timestamp]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[LCGMS_SchoolSearch_Timestamp]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Update_User_ID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="Update_User_ID"
+                      externalMetadataColumnId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Update_User_ID]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Update_User_ID]" />
+                  </inputColumns>
                   <externalMetadataColumns
-                    isUsed="True" />
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Location_Code]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="Location_Code" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Location_Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Location_Name" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Address_Line_1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Address_Line_1" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[X_Coordinate]"
+                      dataType="numeric"
+                      name="X_Coordinate"
+                      precision="12"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Y_Coordinate]"
+                      dataType="numeric"
+                      name="Y_Coordinate"
+                      precision="12"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Primary_Site_Flag]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Primary_Site_Flag" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Managed_By_Code]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="Managed_By_Code" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Managed_By_Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="35"
+                      name="Managed_By_Name" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Learning_Community_Code]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Learning_Community_Code" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Location_Type_Code]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="Location_Type_Code" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Location_Category_Code]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="Location_Category_Code" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="City" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[State_Code]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="State_Code" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Zip]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Zip" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Geographical_District_Code]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="Geographical_District_Code" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Grades]"
+                      codePage="1252"
+                      dataType="str"
+                      length="45"
+                      name="Grades" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Administrative_District_Code]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="Administrative_District_Code" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Building_Id_Number]"
+                      dataType="i4"
+                      name="Building_Id_Number" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Location_Phone_Number]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      name="Location_Phone_Number" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NTA_Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="75"
+                      name="NTA_Name" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Borough_Code]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Borough_Code" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Status_Code]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Status_Code" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LCGMS_SchoolSearch_Timestamp]"
+                      dataType="dbTimeStamp"
+                      name="LCGMS_SchoolSearch_Timestamp" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Update_User_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="Update_User_ID" />
+                  </externalMetadataColumns>
                 </input>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="OLE DB Destination Error Output"
-                  synchronousInputId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  synchronousInputId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -159,7 +490,7 @@
               </outputs>
             </component>
             <component
-              refId="Package\Data Flow Task\OLE DB Source"
+              refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source"
               componentClassID="Microsoft.OLEDBSource"
               contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
               description="OLE DB Source"
@@ -208,7 +539,7 @@
               </properties>
               <connections>
                 <connection
-                  refId="Package\Data Flow Task\OLE DB Source.Connections[OleDbConnection]"
+                  refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Connections[OleDbConnection]"
                   connectionManagerID="Package.ConnectionManagers[ES11VdSINFSQL01.Supertable]"
                   connectionManagerRefId="Package.ConnectionManagers[ES11VdSINFSQL01.Supertable]"
                   description="The OLE DB runtime connection used to access the database."
@@ -216,408 +547,408 @@
               </connections>
               <outputs>
                 <output
-                  refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output]"
+                  refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output]"
                   name="OLE DB Source Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Location_Code]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Location_Code]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Location_Code]"
+                      externalMetadataColumnId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Location_Code]"
                       length="4"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Location_Code]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Location_Code]"
                       name="Location_Code"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Location_Name]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Location_Name]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Location_Name]"
+                      externalMetadataColumnId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Location_Name]"
                       length="100"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Location_Name]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Location_Name]"
                       name="Location_Name"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Address_Line_1]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Address_Line_1]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Address_Line_1]"
+                      externalMetadataColumnId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Address_Line_1]"
                       length="50"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Address_Line_1]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Address_Line_1]"
                       name="Address_Line_1"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[X_Coordinate]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[X_Coordinate]"
                       dataType="numeric"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[X_Coordinate]"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[X_Coordinate]"
+                      externalMetadataColumnId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[X_Coordinate]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[X_Coordinate]"
                       name="X_Coordinate"
                       precision="12"
                       scale="2"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Y_Coordinate]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Y_Coordinate]"
                       dataType="numeric"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Y_Coordinate]"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Y_Coordinate]"
+                      externalMetadataColumnId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Y_Coordinate]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Y_Coordinate]"
                       name="Y_Coordinate"
                       precision="12"
                       scale="2"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Primary_Site_Flag]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Primary_Site_Flag]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Primary_Site_Flag]"
+                      externalMetadataColumnId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Primary_Site_Flag]"
                       length="1"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Primary_Site_Flag]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Primary_Site_Flag]"
                       name="Primary_Site_Flag"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Managed_By_Code]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Managed_By_Code]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Managed_By_Code]"
+                      externalMetadataColumnId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Managed_By_Code]"
                       length="2"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Managed_By_Code]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Managed_By_Code]"
                       name="Managed_By_Code"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Managed_By_Name]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Managed_By_Name]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Managed_By_Name]"
+                      externalMetadataColumnId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Managed_By_Name]"
                       length="35"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Managed_By_Name]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Managed_By_Name]"
                       name="Managed_By_Name"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Learning_Community_Code]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Learning_Community_Code]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Learning_Community_Code]"
+                      externalMetadataColumnId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Learning_Community_Code]"
                       length="1"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Learning_Community_Code]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Learning_Community_Code]"
                       name="Learning_Community_Code"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Location_Type_Code]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Location_Type_Code]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Location_Type_Code]"
+                      externalMetadataColumnId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Location_Type_Code]"
                       length="2"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Location_Type_Code]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Location_Type_Code]"
                       name="Location_Type_Code"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Location_Category_Code]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Location_Category_Code]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Location_Category_Code]"
+                      externalMetadataColumnId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Location_Category_Code]"
                       length="2"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Location_Category_Code]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Location_Category_Code]"
                       name="Location_Category_Code"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[City]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[City]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                      externalMetadataColumnId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[City]"
                       length="50"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[City]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[City]"
                       name="City"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[State_Code]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[State_Code]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[State_Code]"
+                      externalMetadataColumnId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[State_Code]"
                       length="2"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[State_Code]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[State_Code]"
                       name="State_Code"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Zip]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Zip]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Zip]"
+                      externalMetadataColumnId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Zip]"
                       length="10"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Zip]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Zip]"
                       name="Zip"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Geographical_District_Code]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Geographical_District_Code]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Geographical_District_Code]"
+                      externalMetadataColumnId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Geographical_District_Code]"
                       length="2"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Geographical_District_Code]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Geographical_District_Code]"
                       name="Geographical_District_Code"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Grades]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Grades]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Grades]"
+                      externalMetadataColumnId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Grades]"
                       length="45"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Grades]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Grades]"
                       name="Grades"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Administrative_District_Code]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Administrative_District_Code]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Administrative_District_Code]"
+                      externalMetadataColumnId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Administrative_District_Code]"
                       length="2"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Administrative_District_Code]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Administrative_District_Code]"
                       name="Administrative_District_Code"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Building_Id_Number]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Building_Id_Number]"
                       dataType="i4"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Building_Id_Number]"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Building_Id_Number]"
+                      externalMetadataColumnId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Building_Id_Number]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Building_Id_Number]"
                       name="Building_Id_Number"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Location_Phone_Number]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Location_Phone_Number]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Location_Phone_Number]"
+                      externalMetadataColumnId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Location_Phone_Number]"
                       length="15"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Location_Phone_Number]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Location_Phone_Number]"
                       name="Location_Phone_Number"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[NTA_Name]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[NTA_Name]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[NTA_Name]"
+                      externalMetadataColumnId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[NTA_Name]"
                       length="75"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[NTA_Name]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[NTA_Name]"
                       name="NTA_Name"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Borough_Code]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Borough_Code]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Borough_Code]"
+                      externalMetadataColumnId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Borough_Code]"
                       length="1"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Borough_Code]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Borough_Code]"
                       name="Borough_Code"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Status_Code]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Status_Code]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Status_Code]"
+                      externalMetadataColumnId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Status_Code]"
                       length="1"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Status_Code]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Status_Code]"
                       name="Status_Code"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[LCGMS_SchoolSearch_Timestamp]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[LCGMS_SchoolSearch_Timestamp]"
                       dataType="dbTimeStamp"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LCGMS_SchoolSearch_Timestamp]"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[LCGMS_SchoolSearch_Timestamp]"
+                      externalMetadataColumnId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LCGMS_SchoolSearch_Timestamp]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[LCGMS_SchoolSearch_Timestamp]"
                       name="LCGMS_SchoolSearch_Timestamp"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Update_User_ID]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Update_User_ID]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Update_User_ID]"
+                      externalMetadataColumnId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Update_User_ID]"
                       length="20"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Update_User_ID]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[Update_User_ID]"
                       name="Update_User_ID"
                       truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Location_Code]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Location_Code]"
                       codePage="1252"
                       dataType="str"
                       length="4"
                       name="Location_Code" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Location_Name]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Location_Name]"
                       codePage="1252"
                       dataType="str"
                       length="100"
                       name="Location_Name" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Address_Line_1]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Address_Line_1]"
                       codePage="1252"
                       dataType="str"
                       length="50"
                       name="Address_Line_1" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[X_Coordinate]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[X_Coordinate]"
                       dataType="numeric"
                       name="X_Coordinate"
                       precision="12"
                       scale="2" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Y_Coordinate]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Y_Coordinate]"
                       dataType="numeric"
                       name="Y_Coordinate"
                       precision="12"
                       scale="2" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Primary_Site_Flag]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Primary_Site_Flag]"
                       codePage="1252"
                       dataType="str"
                       length="1"
                       name="Primary_Site_Flag" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Managed_By_Code]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Managed_By_Code]"
                       codePage="1252"
                       dataType="str"
                       length="2"
                       name="Managed_By_Code" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Managed_By_Name]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Managed_By_Name]"
                       codePage="1252"
                       dataType="str"
                       length="35"
                       name="Managed_By_Name" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Learning_Community_Code]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Learning_Community_Code]"
                       codePage="1252"
                       dataType="str"
                       length="1"
                       name="Learning_Community_Code" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Location_Type_Code]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Location_Type_Code]"
                       codePage="1252"
                       dataType="str"
                       length="2"
                       name="Location_Type_Code" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Location_Category_Code]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Location_Category_Code]"
                       codePage="1252"
                       dataType="str"
                       length="2"
                       name="Location_Category_Code" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[City]"
                       codePage="1252"
                       dataType="str"
                       length="50"
                       name="City" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[State_Code]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[State_Code]"
                       codePage="1252"
                       dataType="str"
                       length="2"
                       name="State_Code" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Zip]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Zip]"
                       codePage="1252"
                       dataType="str"
                       length="10"
                       name="Zip" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Geographical_District_Code]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Geographical_District_Code]"
                       codePage="1252"
                       dataType="str"
                       length="2"
                       name="Geographical_District_Code" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Grades]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Grades]"
                       codePage="1252"
                       dataType="str"
                       length="45"
                       name="Grades" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Administrative_District_Code]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Administrative_District_Code]"
                       codePage="1252"
                       dataType="str"
                       length="2"
                       name="Administrative_District_Code" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Building_Id_Number]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Building_Id_Number]"
                       dataType="i4"
                       name="Building_Id_Number" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Location_Phone_Number]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Location_Phone_Number]"
                       codePage="1252"
                       dataType="str"
                       length="15"
                       name="Location_Phone_Number" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[NTA_Name]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[NTA_Name]"
                       codePage="1252"
                       dataType="str"
                       length="75"
                       name="NTA_Name" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Borough_Code]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Borough_Code]"
                       codePage="1252"
                       dataType="str"
                       length="1"
                       name="Borough_Code" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Status_Code]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Status_Code]"
                       codePage="1252"
                       dataType="str"
                       length="1"
                       name="Status_Code" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LCGMS_SchoolSearch_Timestamp]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LCGMS_SchoolSearch_Timestamp]"
                       dataType="dbTimeStamp"
                       name="LCGMS_SchoolSearch_Timestamp" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Update_User_ID]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Update_User_ID]"
                       codePage="1252"
                       dataType="str"
                       length="20"
@@ -625,184 +956,184 @@
                   </externalMetadataColumns>
                 </output>
                 <output
-                  refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output]"
                   isErrorOut="true"
                   name="OLE DB Source Error Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Location_Code]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Location_Code]"
                       codePage="1252"
                       dataType="str"
                       length="4"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Location_Code]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Location_Code]"
                       name="Location_Code" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Location_Name]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Location_Name]"
                       codePage="1252"
                       dataType="str"
                       length="100"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Location_Name]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Location_Name]"
                       name="Location_Name" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Address_Line_1]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Address_Line_1]"
                       codePage="1252"
                       dataType="str"
                       length="50"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Address_Line_1]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Address_Line_1]"
                       name="Address_Line_1" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[X_Coordinate]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[X_Coordinate]"
                       dataType="numeric"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[X_Coordinate]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[X_Coordinate]"
                       name="X_Coordinate"
                       precision="12"
                       scale="2" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Y_Coordinate]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Y_Coordinate]"
                       dataType="numeric"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Y_Coordinate]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Y_Coordinate]"
                       name="Y_Coordinate"
                       precision="12"
                       scale="2" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Primary_Site_Flag]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Primary_Site_Flag]"
                       codePage="1252"
                       dataType="str"
                       length="1"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Primary_Site_Flag]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Primary_Site_Flag]"
                       name="Primary_Site_Flag" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Managed_By_Code]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Managed_By_Code]"
                       codePage="1252"
                       dataType="str"
                       length="2"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Managed_By_Code]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Managed_By_Code]"
                       name="Managed_By_Code" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Managed_By_Name]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Managed_By_Name]"
                       codePage="1252"
                       dataType="str"
                       length="35"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Managed_By_Name]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Managed_By_Name]"
                       name="Managed_By_Name" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Learning_Community_Code]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Learning_Community_Code]"
                       codePage="1252"
                       dataType="str"
                       length="1"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Learning_Community_Code]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Learning_Community_Code]"
                       name="Learning_Community_Code" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Location_Type_Code]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Location_Type_Code]"
                       codePage="1252"
                       dataType="str"
                       length="2"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Location_Type_Code]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Location_Type_Code]"
                       name="Location_Type_Code" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Location_Category_Code]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Location_Category_Code]"
                       codePage="1252"
                       dataType="str"
                       length="2"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Location_Category_Code]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Location_Category_Code]"
                       name="Location_Category_Code" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[City]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[City]"
                       codePage="1252"
                       dataType="str"
                       length="50"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[City]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[City]"
                       name="City" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[State_Code]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[State_Code]"
                       codePage="1252"
                       dataType="str"
                       length="2"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[State_Code]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[State_Code]"
                       name="State_Code" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Zip]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Zip]"
                       codePage="1252"
                       dataType="str"
                       length="10"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Zip]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Zip]"
                       name="Zip" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Geographical_District_Code]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Geographical_District_Code]"
                       codePage="1252"
                       dataType="str"
                       length="2"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Geographical_District_Code]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Geographical_District_Code]"
                       name="Geographical_District_Code" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Grades]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Grades]"
                       codePage="1252"
                       dataType="str"
                       length="45"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Grades]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Grades]"
                       name="Grades" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Administrative_District_Code]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Administrative_District_Code]"
                       codePage="1252"
                       dataType="str"
                       length="2"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Administrative_District_Code]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Administrative_District_Code]"
                       name="Administrative_District_Code" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Building_Id_Number]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Building_Id_Number]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Building_Id_Number]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Building_Id_Number]"
                       name="Building_Id_Number" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Location_Phone_Number]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Location_Phone_Number]"
                       codePage="1252"
                       dataType="str"
                       length="15"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Location_Phone_Number]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Location_Phone_Number]"
                       name="Location_Phone_Number" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[NTA_Name]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[NTA_Name]"
                       codePage="1252"
                       dataType="str"
                       length="75"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[NTA_Name]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[NTA_Name]"
                       name="NTA_Name" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Borough_Code]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Borough_Code]"
                       codePage="1252"
                       dataType="str"
                       length="1"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Borough_Code]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Borough_Code]"
                       name="Borough_Code" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Status_Code]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Status_Code]"
                       codePage="1252"
                       dataType="str"
                       length="1"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Status_Code]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Status_Code]"
                       name="Status_Code" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LCGMS_SchoolSearch_Timestamp]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LCGMS_SchoolSearch_Timestamp]"
                       dataType="dbTimeStamp"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LCGMS_SchoolSearch_Timestamp]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LCGMS_SchoolSearch_Timestamp]"
                       name="LCGMS_SchoolSearch_Timestamp" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Update_User_ID]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Update_User_ID]"
                       codePage="1252"
                       dataType="str"
                       length="20"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Update_User_ID]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Update_User_ID]"
                       name="Update_User_ID" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      refId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -813,22 +1144,40 @@
           </components>
           <paths>
             <path
-              refId="Package\Data Flow Task.Paths[OLE DB Source Output]"
-              endId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              refId="Package\Data Flow Task - Copy to Azure Database.Paths[OLE DB Source Output]"
+              endId="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination.Inputs[OLE DB Destination Input]"
               name="OLE DB Source Output"
-              startId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output]" />
+              startId="Package\Data Flow Task - Copy to Azure Database\OLE DB Source.Outputs[OLE DB Source Output]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\Execute SQL Task"
+      DTS:refId="Package\Execute SQL Task  - Destination Data Delition"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:Description="Execute SQL Task"
+      DTS:Description="Execute SQL Task  - Destination Data Delition"
+      DTS:DTSID="{b2315528-a0c6-4796-8acb-ff8dae91ae16}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task  - Destination Data Delition"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{67C73310-E710-4014-91B1-3064CE8DE898}"
+          SQLTask:BypassPrepare="False"
+          SQLTask:SqlStatementSource="Truncate table dbo.LCGMS_SchoolSearch;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task - Extract LCGMS School Search Data"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task - Extract LCGMS School Search Data"
       DTS:DTSID="{50A798B6-40EB-4F8F-95A5-D93A9B0ED19F}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Execute SQL Task"
+      DTS:ObjectName="Execute SQL Task - Extract LCGMS School Search Data"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
       DTS:ThreadHint="0">
       <DTS:Variables />
@@ -843,11 +1192,19 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint]"
       DTS:CreationName=""
-      DTS:DTSID="{8326A281-ED11-48DC-BA1D-39936E8DC898}"
-      DTS:From="Package\Execute SQL Task"
+      DTS:DTSID="{30EC4338-A5FE-4B6C-AC8D-4A41D6D2D523}"
+      DTS:From="Package\Execute SQL Task - Extract LCGMS School Search Data"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
-      DTS:To="Package\Data Flow Task" />
+      DTS:To="Package\Execute SQL Task  - Destination Data Delition" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{F11F3233-696C-4458-94FD-7E93FB53C9D3}"
+      DTS:From="Package\Execute SQL Task  - Destination Data Delition"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Data Flow Task - Copy to Azure Database" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -860,29 +1217,55 @@
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="170,42"
-          Id="Package\Execute SQL Task"
-          TopLeft="208,25" />
+          Size="352,42"
+          Id="Package\Data Flow Task - Copy to Azure Database"
+          TopLeft="204,288" />
         <NodeLayout
-          Size="155,42"
-          Id="Package\Data Flow Task"
-          TopLeft="221,139" />
+          Size="365,42"
+          Id="Package\Execute SQL Task  - Destination Data Delition"
+          TopLeft="197,158" />
+        <NodeLayout
+          Size="365,42"
+          Id="Package\Execute SQL Task - Extract LCGMS School Search Data"
+          TopLeft="200,25" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="295.75,67">
+          TopLeft="381,67">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,72"
+              EndConnector="0,91"
               Start="0,0"
-              End="0,64.5">
+              End="0,83.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,64.5" />
+                    End="0,83.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="379.75,200">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,88"
+              Start="0,0"
+              End="0,80.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,80.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -895,44 +1278,44 @@
     </LayoutInfo>
   </Package>
   <TaskHost
-    design-time-name="Package\Data Flow Task">
+    design-time-name="Package\Data Flow Task - Copy to Azure Database">
     <LayoutInfo>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="221,42"
-          Id="Package\Data Flow Task\OLE DB Source"
-          TopLeft="405,76" />
+          Id="Package\Data Flow Task - Copy to Azure Database\OLE DB Source"
+          TopLeft="76,36" />
         <NodeLayout
           Size="177,42"
-          Id="Package\Data Flow Task\OLE DB Destination"
-          TopLeft="405,301" />
+          Id="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination"
+          TopLeft="84,179" />
         <EdgeLayout
-          Id="Package\Data Flow Task.Paths[OLE DB Source Output]"
-          TopLeft="515.5,118">
+          Id="Package\Data Flow Task - Copy to Azure Database.Paths[OLE DB Source Output]"
+          TopLeft="186.5,78">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-22,183"
+              EndConnector="-14,101"
               Start="0,0"
-              End="-22,175.5">
+              End="-14,93.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,87.5" />
+                    End="0,46.5" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,87.5"
-                    Point2="0,91.5"
-                    Point3="-4,91.5" />
+                    Point1="0,46.5"
+                    Point2="0,50.5"
+                    Point3="-4,50.5" />
                   <mssgle:LineSegment
-                    End="-18,91.5" />
+                    End="-10,50.5" />
                   <mssgle:CubicBezierSegment
-                    Point1="-18,91.5"
-                    Point2="-22,91.5"
-                    Point3="-22,95.5" />
+                    Point1="-10,50.5"
+                    Point2="-14,50.5"
+                    Point3="-14,54.5" />
                   <mssgle:LineSegment
-                    End="-22,175.5" />
+                    End="-14,93.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -945,7 +1328,7 @@
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Data Flow Task\OLE DB Source">
+    design-time-name="Package\Data Flow Task - Copy to Azure Database\OLE DB Destination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -958,7 +1341,7 @@
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Data Flow Task\OLE DB Destination">
+    design-time-name="Package\Data Flow Task - Copy to Azure Database\OLE DB Source">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
